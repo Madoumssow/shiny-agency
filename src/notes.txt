@@ -1,0 +1,385 @@
+********************* Voici les réponses à tes questions : I **********************************
+
+*** Question 1
+Est-ce que React nous oblige à choisir un type d'organisation de fichier particulier ?
+
+Réponse : React laisse les développeurs et développeuses libres pour organiser leurs fichiers
+React ne force pas une organisation particulière des fichiers. Il offre la liberté de choisir entre plusieurs méthodes comme l'organisation par fonctionnalité, par type de fichier ou d'autres approches comme l'Atomic Design.
+
+*** Question 2
+Quel outil permet de repérer facilement l'oubli de la déclaration d'une variable, directement dans son éditeur de code ?
+
+Réponse : ESLint + l'extension ESLint
+ESLint est un linter pour JavaScript qui aide à détecter des erreurs, comme l'oubli de la déclaration d'une variable, dans l'éditeur de code.
+
+*** Question 3
+Quel élément de React Router est le plus fréquemment utilisé pour rediriger un utilisateur vers une autre page de son application lorsqu'il clique dessus ?
+
+Réponse : Un composant Link
+Le composant Link de React Router est conçu pour la navigation entre les pages dans une application React, en changeant l'URL sans recharger la page.
+
+*** Question 4
+Quels sont les deux snippets de code qui, combinés, permettent d'utiliser des paramètres passés dans l'URL ?
+
+Réponses :
+
+        Dans le router :
+        jsx
+        Copy code
+        <Route path="/maRoute/:monParam">
+            <MonComposant />
+        </Route>
+
+        Dans le fichier MonComposant :
+        jsx
+        Copy code
+        import { useParams } from 'react-router-dom'
+
+        function MonComposant() {
+        const { monParam } = useParams();
+        return <div>{monParam}</div>;
+        }
+
+Ces deux extraits permettent d'accéder aux paramètres passés dans l'URL via useParams.
+
+*** Question 5
+Parmi ces propositions, quels outils permettent d'ajouter une logique de types à votre application ?
+
+Réponses :
+
+TypeScript
+PropTypes
+Flow
+TypeScript et Flow sont des systèmes de typage statique. PropTypes est une bibliothèque de typage dynamique pour React. ESLint, en revanche, est un linter et ne gère pas directement les types.
+
+*** Question 6
+Comment peut-on exiger de toujours avoir un number à l'aide des propTypes ?
+
+Réponse :
+
+        jsx
+        Copy code
+        Card.propTypes = {
+        amount: PropTypes.number.isRequired,
+        };
+
+Cela garantit que amount est requis et doit être de type number.
+
+*** Question 7
+Comment utiliser une prop variation pour changer la couleur d'un bouton dans un styled component ?
+
+Réponse :
+
+        jsx
+        Copy code
+        const Button = styled.button`
+        background-color: ${(props) => props.variation === 'primary' ? 'blue' : 'red'};
+        `;
+
+Le bon usage est d'accéder à la prop via props.variation.
+
+*** Question 8
+Comment faire en sorte que le bouton grossisse légèrement au survol de la souris ?
+
+Réponse :
+
+        jsx
+        Copy code
+        const Button = styled.button`
+        &:hover {
+            transform: scale(1.1);
+        }
+        `;
+Le pseudo-élément :hover est utilisé pour appliquer le style lors du survol de la souris.
+
+********************* Voici les réponses à tes questions : II **********************************
+
+
+*** Question 1 :
+Quels hooks sont nécessaires pour effectuer des calls API ? Réponses correctes :
+
+useEffect
+useState
+
+Explication : useEffect permet de lancer des effets secondaires comme des appels API, et useState permet de gérer l'état, comme stocker les données reçues d'une API. useFetch n'est pas un hook officiel de React, mais pourrait être une abstraction personnalisée. useContext n'est pas utilisé directement pour les appels API.
+
+*** Question 2 :
+Je souhaite faire un appel API sur l'URL http://localhost:8000, qui me retourne un objet data. Quels snippets de code me permettent de le faire efficacement ?
+Réponses correctes :
+
+Le snippet avec async function callApi()
+Le snippet avec fetch(...).then(...) sans useFetch
+
+Explication :
+Les deux premiers snippets sont corrects car ils réalisent un appel API via fetch et stockent les données avec setData. Le snippet utilisant useFetch n'est pas valide, car useFetch n'existe pas dans React.
+
+*** Question 3 :
+Quels sont les éléments indispensables pour créer un Contexte et le récupérer dans un composant fonction ? Réponses correctes :
+
+Utiliser un Provider auquel on passe un objet value pour wrapper les composants parents
+Récupérer les données avec useContext
+
+Explication : Le Provider et le hook useContext sont essentiels pour fournir et consommer le contexte. connect est un concept de Redux, et un Consumer n'est pas nécessaire avec les hooks.
+
+*** Question 4 :
+Quelles phrases sont incorrectes ? Réponses correctes :
+
+Un Provider ne peut être placé qu'au plus haut niveau d'une application
+Le Contexte est une solution de State Management à part entière
+
+Explication :
+Un Provider peut être placé à n'importe quel niveau dans l'arborescence de l'application, pas seulement au plus haut niveau.
+Le Contexte n'est pas une solution de State Management à part entière, il permet seulement de partager des données à travers les composants.
+
+*** Question 5 :
+Quelles options combinées me permettent d’accéder à mes couleurs ? Réponses correctes :
+
+const { colors } = useContext(ColorsContext)
+<ColorsContext.Consumer>{({ colors }) => (<MyComponent background={colors.background}/>)}</ColorsContext.Consumer>
+
+Explication : Vous pouvez soit utiliser useContext(ColorsContext) dans une fonction, soit utiliser le Consumer pour accéder aux couleurs dans un composant enfant.
+
+*** Question 6 :
+Parmi les options suivantes, quel hook ne fait pas partie des hooks officiels React ? Réponse correcte :
+
+useRedux
+Explication : useRedux n'est pas un hook officiel de React, il provient généralement de Redux. Les autres (useRef, useCallback, useMemo) sont des hooks officiels.
+
+*** Question 7 :
+Quelles sont les règles à respecter pour créer un hook personnalisé ? Réponses correctes :
+
+La fonction doit commencer par use
+Le hook doit être appelé à la racine du composant
+
+Explication : Un hook personnalisé peut appeler d'autres hooks React, mais il doit toujours respecter les règles des hooks (appelé en haut du composant, pas dans des boucles ou des conditions). Vous pouvez utiliser plusieurs hooks personnalisés dans un composant.
+
+*** Question 8 :
+Quelles affirmations à son sujet sont fausses ? Réponses correctes :
+
+Il y a une erreur car value et toggleValue sont retournés entre {} et non entre []
+On pourra récupérer value avec const value = useToggle()
+
+Explication :
+La forme correcte pour retourner plusieurs valeurs dans un hook est un tableau ([]) si on veut un accès positionnel, mais retourner un objet ({}) permet d'accéder par nom, ce qui est aussi correct.
+Pour récupérer value, il faudrait utiliser la déstructuration en { value } = useToggle(), pas const value = useToggle().
+
+
+********************* Voici les réponses à tes questions : III **********************************
+
+*** Question 1 : Quelles affirmations sont fausses ?
+
+L'intégration continue est une solution qui permet de déclencher les tests en même temps que vous écrivez votre code : FAUX. L'intégration continue exécute généralement les tests lorsque le code est soumis (commit/push), mais pas en temps réel pendant l'écriture.
+Vous pouvez appeler vos fichiers de test comme vous voulez, à partir du moment où vous les mettez dans un dossier test : FAUX. Il est préférablede suivre une convention de nommage, généralement en terminant par .test.js, mais certains outils peuvent ne pas reconnaître les fichiers en dehors de cette convention.
+
+*** Question 2 : Quels snippets de code permettent de tester votre fonction ?
+Les snippets valides sont :
+
+                js
+                Copy code
+                it('should multiply by 3', () => {
+                const expected = 6
+                expect(timesThree(2)).toBe(expected)
+                })
+                js
+                Copy code
+                describe('The timesThree function', () => {
+                test('should multiply by 3', () => {
+                const expected = 6
+                expect(timesThree(2)).toBe(expected)
+                })
+                })
+
+*** Question 3 : Complétez la phrase avec les bonnes réponses
+est un bon indicateur des lignes de code qui sont couvertes par les tests
+est lancé avec la commande yarn test -- --coverage
+
+*** Question 4 : Quelles étapes sont nécessaires lorsque vous voulez tester un de vos composants ?
+Importer le composant
+Accéder à l'élément avec lequel vous voulez interagir
+Simuler l'interaction
+Comparer avec ce qui est attendu
+
+*** Question 5 : Quels outils allez-vous devoir importer depuis React Testing Library pour tester votre bouton ?
+fireEvent
+screen
+getByRole
+expect
+render
+
+*** Question 6 : Quel test est valable ?
+Le test valide est :
+
+                js
+                Copy code
+                test('Counter component should increase its count', () => {
+                render(<Counter />)
+                const count = screen.getByText('0')
+                const counterButton = screen.getByRole('button')
+                fireEvent.click(counterButton)
+                expect(count.textContent).toBe('1')
+                })
+
+*** Question 7 : Quelles affirmations sont exactes ?
+Il est possible de passer un paramètre à la fonction render pour lui préciser des éléments qui viennent wrapper le composant qui est rendu
+data-testid peut être passé à n'importe quel élément et permet d'y accéder en faisant getByTestId
+La bibliothèque msw permet de simuler des appels API et de leur préciser les données qui seront récupérées par notre application
+
+*** Question 8 : Quel snippet de code permet de configurer correctement nos tests ?
+Le bon snippet est :
+
+                js
+                Copy code
+                beforeAll(() => server.listen())
+
+                afterEach(() => server.resetHandlers())
+
+                afterAll(() => server.close())
+
+                const server = setupServer(
+                rest.get('http://localhost:3030/getMyData', (req, res, ctx) => {
+                return (res(ctx.json({})))
+                })
+                )
+
+
+********************* Voici les réponses à tes questions : V **********************************
+
+*** Question 1
+Quelles syntaxes sont des syntaxes valables ?
+
+Les syntaxes valables pour créer un composant MyComponent sont :
+
+Avec class et méthode render :
+                javascript
+                Copy code
+                class MyComponent extends React.Component {
+                render() {
+                return (<div>
+                <h1>My component</h1>
+                <p>This is my component text content ✨</p>
+                </div>)
+                }
+                }
+                Avec une fonction fléchée (composant fonctionnel) :
+                javascript
+                Copy code
+                const MyComponent = () => (
+                <div>
+                <h1>My component</h1>
+                <p>This is my component text content ✨</p>
+                </div>
+                )
+                Avec React.createClass (bien que cette méthode soit dépréciée) :
+                javascript
+                Copy code
+                React.createClass({
+                displayName: "MyComponent",
+                render() {
+                return (
+                <div>
+                        <h1>{this.props.title}</h1>
+                </div>
+                )
+                }
+                })
+
+*** Question 2
+Comment faire pour récupérer isConnected dans ChildComponent et l'utiliser dans render() ?
+
+Avec this.props : C'est la bonne manière d'accéder aux props passées au composant enfant.
+
+                javascript
+                Copy code
+                class ChildComponent extends React.Component {
+                render() {
+                const { isConnected } = this.props; // Récupération de isConnected
+                return (
+                <div>
+                        {isConnected ? 'Connecté' : 'Déconnecté'}
+                </div>
+                );
+                }
+                }
+
+*** Question 3
+Quel(s) snippet(s) de code fonctionne(nt) bien ici ?
+
+Avec méthode displayAlert et this :
+
+                javascript
+                Copy code
+                class MyComponent extends Component {
+                displayAlert() {
+                alert(`L'alerte a été déclenchée`);
+                }
+
+                render() {
+                return (
+                <div>
+                        <button onClick={() => this.displayAlert()}>👉 Cliquer ici 👈</button>
+                </div>
+                );
+                }
+                }
+                Avec méthode displayAlert directement dans onClick :
+
+                javascript
+                Copy code
+                class MyComponent extends Component {
+                displayAlert() {
+                alert(`L'alerte a été déclenchée`);
+                }
+
+                render() {
+                return (
+                <div>
+                        <button onClick={this.displayAlert.bind(this)}>👉 Cliquer ici 👈</button>
+                </div>
+                );
+                }
+                }
+
+*** Question 4
+Quel morceau de code doit impérativement figurer pour mettre à jour isFavorite ?
+
+setState({ isFavorite: !this.state.isFavorite }) : C'est la manière correcte de mettre à jour l'état en inversant la valeur de isFavorite.
+
+*** Question 5
+Quelle méthode de cycle de vie est la plus adaptée pour effectuer un call API ?
+
+componentDidMount : C'est l'endroit idéal pour effectuer des appels API car le composant est monté et prêt.
+
+*** Question 6
+Parmi les méthodes componentDidUnmount, componentDidUpdate, componentWillUnmount, et componentDidMount, laquelle est appelée en deuxième ?
+
+componentDidUpdate : C'est la méthode appelée après componentDidMount lorsque le composant est mis à jour.
+
+*** Question 7
+Quel(s) snippet(s) de code permettent de faire une requête AJAX sur localhost:8000 et ensuite d'accéder à vos données ?
+
+Correct avec componentDidMount :
+                javascript
+                Copy code
+                class MonComposant extends Component {
+                componentDidMount() {
+                fetch('http://localhost:8000')
+                .then(response => response.json())
+                .then(data => this.setState({ data }));
+                }
+
+                render() {
+                return <div>Mon Composant</div>;
+                }
+                }
+
+*** Question 8
+Quelles affirmations sont correctes ?
+
+Chaque setState déclenche un nouveau render de notre composant : Correct.
+Les méthodes de cycle de vie permettent d'exécuter notre code à des moments précis : Correct.
+On récupère les props dans un composant classe avec this.props : Correct.
+Les composants classe sont dépréciés et Il est possible de faire moins de choses avec les composants classe qu'avec les composants fonction ne sont pas corrects. Les composants de classe ne sont pas dépréciés et les composants fonctionnels, surtout avec l'introduction des hooks, sont tout aussi puissants.
+
+N'hésite pas à demander si tu as besoin de précisions ou d'exemples supplémentaires !
+
+
